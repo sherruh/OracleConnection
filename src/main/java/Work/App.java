@@ -12,6 +12,7 @@ public class App
             con.close();
         } catch (SQLException | NullPointerException e) {
             e.printStackTrace();
+            System.exit(0);
         }
 
         CellsGSM cellsGSM=new CellsGSM("a","a","a","a",

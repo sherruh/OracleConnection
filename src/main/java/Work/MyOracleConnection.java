@@ -22,7 +22,8 @@ public class MyOracleConnection {
 
             Class.forName("oracle.jdbc.driver.OracleDriver");
             DriverManager.setLoginTimeout(5);
-            String bUrl = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST="+host+")(PORT="+port+"))(CONNECT_DATA=(SERVER = DEDICATED)(SERVICE_NAME="+database+")))";
+            String bUrl = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST="+host+")" +
+                    "(PORT="+port+"))(CONNECT_DATA=(SERVER = DEDICATED)(SERVICE_NAME="+database+")))";
 
             con= DriverManager.getConnection(bUrl,user,pass);
             System.out.println("Connected!");

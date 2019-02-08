@@ -12,6 +12,11 @@ public class App
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        CellsGSM cellsGSM=new CellsGSM("a","a","a","a",
+                "a","a","a","a","a","a","5","6");
+
+        System.out.println(cellsGSM);
     }
 }
 

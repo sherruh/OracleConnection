@@ -6,10 +6,11 @@ public class App
 {
     public static void main( String[] args )
     {
-        Connection con=new MyOracleConnection().getCon();
+        Connection con;
         try {
+            con=new MyOracleConnection().getCon();
             con.close();
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             e.printStackTrace();
         }
 

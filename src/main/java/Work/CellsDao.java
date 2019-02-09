@@ -24,7 +24,7 @@ public class CellsDao {
                 "a.name,u.azimut,u.status,u.ci "+
                 "from NURTELECOM.Gtransmitters u , NURTELECOM.SITES s, NURTELECOM.ANTENNAS a "+
                 "where s.name=u.site_name(+) "+
-                "and u.antenna_name=a.name ";//TODO add channel(BCCH), bsic
+                "and u.antenna_name=a.name ";//TODO add channel(BCCH), bsic. Add where status=On-Air
         List<CellsGSM> cellsGSMList=new ArrayList<>();
         PreparedStatement statement= null;
         statement = this.con.prepareStatement(query);

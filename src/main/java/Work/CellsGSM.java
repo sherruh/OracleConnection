@@ -2,7 +2,7 @@ package Work;
 
 public class CellsGSM extends Cells{
 
-    private String system="GSM";
+    private final String system="GSM";
     private String bsic;
     private String lac;
 
@@ -18,4 +18,5 @@ public class CellsGSM extends Cells{
     public String toString() {
         return system+"\t"+super.toString()+bsic+"\t"+lac;
     }
+
 }

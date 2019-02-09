@@ -33,8 +33,11 @@ public class App
         cellsGSM=new ArrayList<>();
         cellsGSM.add(cellGSM);
         cellsGSM.add(cellGSM);
+        cellsGSM.add(cellGSM);
+        cellsGSM.add(cellGSM);
         try {
-            new CreateBTSFile(cellsGSM);
+            CreateBTSFile createBTSFile= new CreateBTSFile(cellsGSM);
+            createBTSFile.insertDataToBtsFiles();
         } catch (IOException e) {
             e.printStackTrace();
         }

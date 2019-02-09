@@ -11,29 +11,41 @@ import java.util.Scanner;
 public class CellsDao {
 
     private Connection con;
-    private Scanner in;
 
     public CellsDao(Connection con) {
         this.con = con;
-        in=new Scanner(System.in);
     }
 
-    public List<CellsGSM> findAll() throws SQLException {
+    public List<CellsGSM> getCellsGSM() throws SQLException {
 
-        String query="select id,name,country_id from city";//TODO select
+        String query="select  u.TX_ID, u.site_name,u.DX,u.DY,u.height,u.azimut+a.electrical_azimuth as azimuth, u.utilization, " +
+                "u.num_trx,u.lac,"+
+                "u.launch_date,u.fband,s.latitude, s.longitude ,a.beamwidth,a.electrical_azimuth,a.electrical_tilt+u.tilt as tilt," +
+                "a.name,u.azimut,u.status,u.ci "+
+                "from NURTELECOM.Gtransmitters u , NURTELECOM.SITES s, NURTELECOM.ANTENNAS a "+
+                "where s.name=u.site_name(+) "+
+                "and u.antenna_name=a.name ";//TODO add channel(BCCH), bsic
         List<CellsGSM> cellsGSMList=new ArrayList<>();
         PreparedStatement statement= null;
         statement = this.con.prepareStatement(query);
         ResultSet rs=statement.executeQuery();
         System.out.println("Executed selecting GSM cells!");
         while (rs.next()){
-            CellsGSM cellsGSM=new CellsGSM(rs.getInt("id"),rs.getString("name"),rs.getInt("country_id"));//TODO fields
+            CellsGSM cellsGSM=new CellsGSM(rs.getString("site_name"),rs.getString("latitude"),
+                    rs.getString("longitude"),getCellName(rs.getString("site_name"),rs.getString("TX_ID")),
+                    rs.getString("channel"),rs.getString("ci"),rs.getString("azimuth"),
+                    rs.getString("beamwidth"),rs.getString("height"),rs.getString("tilt"),
+                    rs.getString("bsic"),rs.getString("lac"));
             cellsGSMList.add(cellsGSM);
         }
         rs.close();
         statement.close();
         return cellsGSMList;
 
+    }
+
+    private String getCellName(String site_name, String txId) {
+        return site_name.substring(6)+"-"+txId.substring(5,7);
     }
 
 }

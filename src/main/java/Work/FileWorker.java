@@ -10,9 +10,9 @@ public class FileWorker {
 
     private String[] technologies;
     private String[] regions;
-    private String gsmHead="SYSTEM\tSITE\tLAT\tLON\tCELL\tCH\tBSIC\tCID\tLAC\tDIR\tBEAM\tHEIGHT\tTILT";
-    private String umtsHead="SYSTEM\tSITE\tLAT\tLON\tCELL\tCH\tCID\tSCR\tDIR\tBEAM\tHEIGHT\tTILT";//TODO add lac
-    private String lteHead="SYSTEM\tSITE\tLAT\tLON\tCELL\tCH\tCID\tPCI\tDIR\tBEAM\tHEIGHT\tTILT";//TODO add tac
+    private String gsmHead="SYSTEM\tSITE\tLAT\tLON\tCELL\tCH\tCID\tDIR\tBEAM\tHEIGHT\tTILT\tBSIC\tLAC";
+    private String umtsHead="SYSTEM\tSITE\tLAT\tLON\tCELL\tCH\tCID\tDIR\tBEAM\tHEIGHT\tTILT\tSCR";//TODO add lac
+    private String lteHead="SYSTEM\tSITE\tLAT\tLON\tCELL\tCH\tCID\tDIR\tBEAM\tHEIGHT\tTILT\tPCI";//TODO add tac
     private HashMap<String,FileWriter> files;
 
     public FileWorker(String[] technologies, String[] regions, String currentDate) throws IOException {

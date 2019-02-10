@@ -47,6 +47,7 @@ public class CreateBTSFile {
     }
 
     private void insert(String region,List<Cells> cells) throws IOException {
+
         for (Cells cell:cells){
 
             switch(cell.site.substring(5,10)){
@@ -83,6 +84,7 @@ public class CreateBTSFile {
                 default:
                     System.out.println(cell);
                     break;
+
             }
             //if(cellGSM.site.substring(5,10).equals("_ChD-")){
             //    files.get(gsmName+chDName).write(cellGSM.toString());
@@ -90,6 +92,7 @@ public class CreateBTSFile {
             //    files.get(gsmName+chDName).write(cellGSM.toString());
             //}
             System.out.println(cell.toString().substring(0,cell.toString().indexOf("\t"))+ " cells inserted!");
+
         }
     }
 

@@ -26,18 +26,20 @@ public class CellsDao {
                 "where s.name=u.site_name(+) "+
                 "and u.antenna_name=a.name " +
                 "and status='On-Air'";
-        List<Cells> cellsGSMList=new ArrayList<Cells>();
+        List<Cells> cellsGSMList=new ArrayList<>();
         PreparedStatement statement= null;
         statement = this.con.prepareStatement(query);
         ResultSet rs=statement.executeQuery();
         System.out.println("Executed selecting GSM cells!");
         while (rs.next()){
+
             CellsGSM cellsGSM=new CellsGSM(rs.getString("site_name"),rs.getString("latitude"),
                     rs.getString("longitude"),getCellName(rs.getString("site_name"),rs.getString("TX_ID")),
                     rs.getString("channel"),rs.getString("ci"),rs.getString("azimuth"),
                     rs.getString("beamwidth"),rs.getString("height"),rs.getString("tilt"),
                     rs.getString("bsic"),rs.getString("lac"));
             cellsGSMList.add(cellsGSM);
+
         }
         rs.close();
         statement.close();

@@ -19,12 +19,13 @@ public class CellsDao {
     public List<CellsGSM> getCellsGSM() throws SQLException {
 
         String query="select  u.TX_ID, u.site_name,u.DX,u.DY,u.height,u.azimut+a.electrical_azimuth as azimuth, u.utilization, " +
-                "u.num_trx,u.lac,"+
+                "u.num_trx,u.lac,u.control_channel as channel,u.bsic,"+
                 "u.launch_date,u.fband,s.latitude, s.longitude ,a.beamwidth,a.electrical_azimuth,a.electrical_tilt+u.tilt as tilt," +
                 "a.name,u.azimut,u.status,u.ci "+
                 "from NURTELECOM.Gtransmitters u , NURTELECOM.SITES s, NURTELECOM.ANTENNAS a "+
                 "where s.name=u.site_name(+) "+
-                "and u.antenna_name=a.name ";//TODO add channel(BCCH), bsic. Add where status=On-Air
+                "and u.antenna_name=a.name " +
+                "and status='On-Air'";
         List<CellsGSM> cellsGSMList=new ArrayList<>();
         PreparedStatement statement= null;
         statement = this.con.prepareStatement(query);

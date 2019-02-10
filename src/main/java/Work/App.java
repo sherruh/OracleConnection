@@ -1,9 +1,7 @@
 package Work;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,34 +14,37 @@ public class App
         Connection con;
         CellsDao cellsDao;
         List<CellsGSM> cellsGSM;
-        //try {
-        //    con=new MyOracleConnection().getCon();
-        //    cellsDao=new CellsDao(con);
-        //    cellsGSM=cellsDao.getCellsGSM();
-        //    //TODO selects
-        //    con.close();
-        //} catch (SQLException | NullPointerException | IOException | ClassNotFoundException e) {
-        //    e.printStackTrace();
-        //    in.nextLine();
-        //}
-
-        CellsGSM cellGSM=new CellsGSM("70006_ChD-Novopavlovka","a","a","a",
-                "a","a","a","a","a","a","5","6");
-        System.out.println(cellGSM);
-        cellsGSM=new ArrayList<>();
-        cellsGSM.add(cellGSM);
-        cellsGSM.add(cellGSM);
-        cellsGSM.add(cellGSM);
-        cellsGSM.add(cellGSM);
         try {
+
+            con=new MyOracleConnection().getCon();
+            cellsDao=new CellsDao(con);
+            cellsGSM=cellsDao.getCellsGSM();
+            //TODO selects UMTS LTE
+            con.close();
             CreateBTSFile createBTSFile= new CreateBTSFile(cellsGSM);
             createBTSFile.insertDataToBtsFiles();
-        } catch (IOException e) {
+            System.out.println("Ok!");
+            in.nextLine();
+
+        } catch (SQLException | NullPointerException | IOException | ClassNotFoundException e) {
             e.printStackTrace();
+            in.nextLine();
         }
 
-        System.out.println("Ok!");//TODO place in try
-        in.nextLine();
+        //CellsGSM cellGSM=new CellsGSM("70006_ChD-Novopavlovka","a","a","a",
+        //        "a","a","a","a","a","a","5","6");
+        //System.out.println(cellGSM);
+        //cellsGSM=new ArrayList<>();
+        //cellsGSM.add(cellGSM);
+        //cellsGSM.add(cellGSM);
+        //cellsGSM.add(cellGSM);
+        //cellsGSM.add(cellGSM);
+        //try {
+        //    CreateBTSFile createBTSFile= new CreateBTSFile(cellsGSM);
+        //    createBTSFile.insertDataToBtsFiles();
+        //} catch (IOException e) {
+        //    e.printStackTrace();
+        //}
 
     }
 }

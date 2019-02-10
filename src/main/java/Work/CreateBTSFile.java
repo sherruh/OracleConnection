@@ -35,15 +35,56 @@ public class CreateBTSFile {
 
     public void insertDataToBtsFiles() throws IOException {
 
-        for (CellsGSM cellGSM:cellsGSM){
-            if(cellGSM.site.substring(5,10).equals("_ChD-")){
-                files.get(gsmName+chDName).write(cellGSM.toString());
-            }else if(cellGSM.site.substring(5,10).equals("_Bsk-")){
-                files.get(gsmName+chDName).write(cellGSM.toString());
-            }
-        }
+        insertGSM();
         fileWorker.closeFiles();
 
+    }
+
+    private void insertGSM() throws IOException {
+        for (CellsGSM cellGSM:cellsGSM){
+
+            switch(cellGSM.site.substring(5,10)){
+                case "_ChD-":
+                    files.get(gsmName+chDName).write(cellGSM.toString());
+                    break;
+                case "_Bsk-":
+                    files.get(gsmName+chDName).write(cellGSM.toString());
+                    break;
+                case "_IsK-":
+                    files.get(gsmName+ikName).write(cellGSM.toString());
+                    break;
+                case "_NrN-":
+                    files.get(gsmName+nrnName).write(cellGSM.toString());
+                    break;
+                case "_Tls-":
+                    files.get(gsmName+tlsName).write(cellGSM.toString());
+                    break;
+                case "_Djk-":
+                    files.get(gsmName+djName).write(cellGSM.toString());
+                    break;
+                case "_DjA-":
+                    files.get(gsmName+djName).write(cellGSM.toString());
+                    break;
+                case "_Osk-":
+                    files.get(gsmName+oskName).write(cellGSM.toString());
+                    break;
+                case "_Osh-":
+                    files.get(gsmName+oskName).write(cellGSM.toString());
+                    break;
+                case "_Btk-":
+                    files.get(gsmName+btkName).write(cellGSM.toString());
+                    break;
+                default:
+                    System.out.println(cellGSM);
+                    break;
+            }
+            //if(cellGSM.site.substring(5,10).equals("_ChD-")){
+            //    files.get(gsmName+chDName).write(cellGSM.toString());
+            //}else if(cellGSM.site.substring(5,10).equals("_Bsk-")){
+            //    files.get(gsmName+chDName).write(cellGSM.toString());
+            //}
+            System.out.println("GSM cell inserted!");
+        }
     }
 
 }

@@ -22,9 +22,9 @@ public class App
             con=new MyOracleConnection().getCon();
             cellsDao=new CellsDao(con);
             cellsGSM=cellsDao.getCellsGSM();
-            cellsUMTS=null;
+            cellsUMTS=cellsDao.getCellsUMTS();
             cellsLTE=null;
-            //TODO selects UMTS LTE
+            //TODO selects LTE
             con.close();
             CreateBTSFile createBTSFile= new CreateBTSFile(cellsGSM,cellsUMTS,cellsLTE);
             createBTSFile.insertDataToBtsFiles();

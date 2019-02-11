@@ -14,6 +14,6 @@ public class CellsLTE extends Cells {
 
     @Override
     public String toString() {
-        return system+"\t"+super.toString()+pci;
+        return "\n"+system+"\t"+super.toString()+pci;
     }
 }

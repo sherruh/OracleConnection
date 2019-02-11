@@ -12,7 +12,7 @@ public class FileWorker {
     private String[] technologies;
     private String[] regions;
     private String gsmHead="SYSTEM\tSITE\tLAT\tLON\tCELL\tCH\tCID\tDIR\tBEAM\tHEIGHT\tTILT\tBSIC\tLAC";
-    private String umtsHead="SYSTEM\tSITE\tLAT\tLON\tCELL\tCH\tCID\tDIR\tBEAM\tHEIGHT\tTILT\tSCR";//TODO add lac
+    private String umtsHead="SYSTEM\tSITE\tLAT\tLON\tCELL\tCH\tCID\tDIR\tBEAM\tHEIGHT\tTILT\tSCR\tLAC";
     private String lteHead="SYSTEM\tSITE\tLAT\tLON\tCELL\tCH\tCID\tDIR\tBEAM\tHEIGHT\tTILT\tPCI";//TODO add tac
     private HashMap<String,FileWriter> files;
 

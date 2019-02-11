@@ -20,13 +20,17 @@ public class CreateBTSFile {
     private final String[] technologies=new String[]{lteName,umtsName,gsmName};
     private final String[] regions=new String[]{chDName,ikName,nrnName,tlsName,djName,oskName,btkName};
     private String currentDate;
-    private List<CellsGSM> cellsGSM;
+    private List<Cells> cellsGSM ;
+    private List<Cells> cellsUMTS;
+    private List<Cells> cellsLTE;
     private Map<String, FileWriter> files;
     private FileWorker fileWorker;
 
-    public CreateBTSFile(List<CellsGSM> cellsGSM) throws IOException {
+    public CreateBTSFile(List<Cells> cellsGSM,List<Cells> cellsUMTS,List<Cells> cellsLTE) throws IOException {
 
         this.cellsGSM = cellsGSM;
+        this.cellsUMTS=cellsUMTS;
+        this.cellsLTE=cellsLTE;
         currentDate= new SimpleDateFormat("ddMMyyyy").format(Calendar.getInstance().getTime());
         fileWorker=new FileWorker(technologies,regions,currentDate);
         files=fileWorker.getFiles();
@@ -35,56 +39,67 @@ public class CreateBTSFile {
 
     public void insertDataToBtsFiles() throws IOException {
 
-        insertGSM();
+        insert(gsmName,cellsGSM);
+        insert(umtsName,cellsUMTS);
+        insert(lteName,cellsLTE);
         fileWorker.closeFiles();
 
     }
 
-    private void insertGSM() throws IOException {
-        for (CellsGSM cellGSM:cellsGSM){
+    private void insert(String region,List<Cells> cells) throws IOException {
 
-            switch(cellGSM.site.substring(5,10)){
-                case "_ChD-":
-                    files.get(gsmName+chDName).write(cellGSM.toString());
-                    break;
-                case "_Bsk-":
-                    files.get(gsmName+chDName).write(cellGSM.toString());
-                    break;
-                case "_IsK-":
-                    files.get(gsmName+ikName).write(cellGSM.toString());
-                    break;
-                case "_NrN-":
-                    files.get(gsmName+nrnName).write(cellGSM.toString());
-                    break;
-                case "_Tls-":
-                    files.get(gsmName+tlsName).write(cellGSM.toString());
-                    break;
-                case "_Djk-":
-                    files.get(gsmName+djName).write(cellGSM.toString());
-                    break;
-                case "_DjA-":
-                    files.get(gsmName+djName).write(cellGSM.toString());
-                    break;
-                case "_Osk-":
-                    files.get(gsmName+oskName).write(cellGSM.toString());
-                    break;
-                case "_Osh-":
-                    files.get(gsmName+oskName).write(cellGSM.toString());
-                    break;
-                case "_Btk-":
-                    files.get(gsmName+btkName).write(cellGSM.toString());
-                    break;
-                default:
-                    System.out.println(cellGSM);
-                    break;
+        if (cells!=null){
+
+            for (Cells cell:cells){
+
+                switch(cell.site.substring(5,10)){
+                    case "_ChD-":
+                        files.get(region+chDName).write(cell.toString());
+                        break;
+                    case "_Bsk-":
+                        files.get(region+chDName).write(cell.toString());
+                        break;
+                    case "_IsK-":
+                        files.get(region+ikName).write(cell.toString());
+                        break;
+                    case "_NrN-":
+                        files.get(region+nrnName).write(cell.toString());
+                        break;
+                    case "_Tls-":
+                        files.get(region+tlsName).write(cell.toString());
+                        break;
+                    case "_Djk-":
+                        files.get(region+djName).write(cell.toString());
+                        break;
+                    case "_DjA-":
+                        files.get(region+djName).write(cell.toString());
+                        break;
+                    case "_Osk-":
+                        files.get(region+oskName).write(cell.toString());
+                        break;
+                    case "_Osh-":
+                        files.get(region+oskName).write(cell.toString());
+                        break;
+                    case "_Btk-":
+                        files.get(region+btkName).write(cell.toString());
+                        break;
+                    default:
+                        System.out.println(cell);
+                        break;
+
+                }
+                //if(cellGSM.site.substring(5,10).equals("_ChD-")){
+                //    files.get(gsmName+chDName).write(cellGSM.toString());
+                //}else if(cellGSM.site.substring(5,10).equals("_Bsk-")){
+                //    files.get(gsmName+chDName).write(cellGSM.toString());
+                //}
+
             }
-            //if(cellGSM.site.substring(5,10).equals("_ChD-")){
-            //    files.get(gsmName+chDName).write(cellGSM.toString());
-            //}else if(cellGSM.site.substring(5,10).equals("_Bsk-")){
-            //    files.get(gsmName+chDName).write(cellGSM.toString());
-            //}
-            System.out.println("GSM cell inserted!");
-        }
-    }
+            System.out.println(cells.get(0).toString().substring(0,cells.get(0).toString().indexOf("\t"))+ " cells inserted!");
 
+        }else{
+            System.out.println( "Cells is null!");
+        }
+
+    }
 }

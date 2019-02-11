@@ -13,15 +13,20 @@ public class App
         Scanner in=new Scanner(System.in);
         Connection con;
         CellsDao cellsDao;
-        List<CellsGSM> cellsGSM;
+        List<Cells> cellsGSM;
+        List<Cells> cellsUMTS;
+        List<Cells> cellsLTE;
+
         try {
 
             con=new MyOracleConnection().getCon();
             cellsDao=new CellsDao(con);
             cellsGSM=cellsDao.getCellsGSM();
+            cellsUMTS=null;
+            cellsLTE=null;
             //TODO selects UMTS LTE
             con.close();
-            CreateBTSFile createBTSFile= new CreateBTSFile(cellsGSM);
+            CreateBTSFile createBTSFile= new CreateBTSFile(cellsGSM,cellsUMTS,cellsLTE);
             createBTSFile.insertDataToBtsFiles();
             System.out.println("Ok!");
             in.nextLine();

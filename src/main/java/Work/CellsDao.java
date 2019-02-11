@@ -16,7 +16,7 @@ public class CellsDao {
         this.con = con;
     }
 
-    public List<CellsGSM> getCellsGSM() throws SQLException {
+    public List<Cells> getCellsGSM() throws SQLException {
 
         String query="select  u.TX_ID, u.site_name,u.DX,u.DY,u.height,u.azimut+a.electrical_azimuth as azimuth, u.utilization, " +
                 "u.num_trx,u.lac,u.control_channel as channel,u.bsic,"+
@@ -26,18 +26,20 @@ public class CellsDao {
                 "where s.name=u.site_name(+) "+
                 "and u.antenna_name=a.name " +
                 "and status='On-Air'";
-        List<CellsGSM> cellsGSMList=new ArrayList<>();
+        List<Cells> cellsGSMList=new ArrayList<>();
         PreparedStatement statement= null;
         statement = this.con.prepareStatement(query);
         ResultSet rs=statement.executeQuery();
         System.out.println("Executed selecting GSM cells!");
         while (rs.next()){
+
             CellsGSM cellsGSM=new CellsGSM(rs.getString("site_name"),rs.getString("latitude"),
                     rs.getString("longitude"),getCellName(rs.getString("site_name"),rs.getString("TX_ID")),
                     rs.getString("channel"),rs.getString("ci"),rs.getString("azimuth"),
                     rs.getString("beamwidth"),rs.getString("height"),rs.getString("tilt"),
                     rs.getString("bsic"),rs.getString("lac"));
             cellsGSMList.add(cellsGSM);
+
         }
         rs.close();
         statement.close();

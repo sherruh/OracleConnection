@@ -74,6 +74,33 @@ public class CellsDao {
 
     }
 
+    public List<Cells> getCellsLTE() throws SQLException {
+
+        String query="select s.name,s.latitude,s.longitude,l.tx_id,c.channel,c.cell_id,l.azimut+a.electrical_azimuth as " +
+                "azimuth,a.beamwidth,l.height,l.tilt,c.phy_cell_id,l.tac from NURTELECOM.LTRANSMITTERS l,NURTELECOM.SITES s, " +
+                "NURTELECOM.ANTENNAS a,NURTELECOM.LCELLS c " +
+                "where  l.site_name=s.name and l.antenna_name=a.name and l.tx_id=c.tx_id and l.status='On-Air'";
+        List<Cells> cellsLTEList=new ArrayList<>();
+        PreparedStatement statement= null;
+        statement = this.con.prepareStatement(query);
+        ResultSet rs=statement.executeQuery();
+        System.out.println("Executed selecting UMTS cells!");
+        while (rs.next()){
+
+            CellsLTE cellsLTE=new CellsLTE(rs.getString("name"),rs.getString("latitude"),
+                    rs.getString("longitude"),getCellName(rs.getString("name"),rs.getString("tx_id")),
+                    rs.getString("channel"),rs.getString("cell_id").substring(5,7),rs.getString("azimuth"),
+                    rs.getString("beamwidth"),rs.getString("height"),rs.getString("tilt"),
+                    rs.getString("phy_cell_id"),rs.getString("tac"));
+            cellsLTEList.add(cellsLTE);
+
+        }
+        rs.close();
+        statement.close();
+        return cellsLTEList;
+
+    }
+
     private String getCellName(String site_name, String txId) {
         return site_name.substring(6)+"-"+txId.substring(5,7);
     }

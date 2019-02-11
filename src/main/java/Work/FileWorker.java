@@ -13,7 +13,7 @@ public class FileWorker {
     private String[] regions;
     private String gsmHead="SYSTEM\tSITE\tLAT\tLON\tCELL\tCH\tCID\tDIR\tBEAM\tHEIGHT\tTILT\tBSIC\tLAC";
     private String umtsHead="SYSTEM\tSITE\tLAT\tLON\tCELL\tCH\tCID\tDIR\tBEAM\tHEIGHT\tTILT\tSCR\tLAC";
-    private String lteHead="SYSTEM\tSITE\tLAT\tLON\tCELL\tCH\tCID\tDIR\tBEAM\tHEIGHT\tTILT\tPCI";//TODO add tac
+    private String lteHead="SYSTEM\tSITE\tLAT\tLON\tCELL\tCH\tCID\tDIR\tBEAM\tHEIGHT\tTILT\tPCI\tTAC";
     private HashMap<String,FileWriter> files;
 
     public FileWorker(String[] technologies, String[] regions, String currentDate) throws IOException {

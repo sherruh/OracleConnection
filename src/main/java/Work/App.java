@@ -23,8 +23,7 @@ public class App
             cellsDao=new CellsDao(con);
             cellsGSM=cellsDao.getCellsGSM();
             cellsUMTS=cellsDao.getCellsUMTS();
-            cellsLTE=null;
-            //TODO selects LTE
+            cellsLTE=cellsDao.getCellsLTE();
             con.close();
             CreateBTSFile createBTSFile= new CreateBTSFile(cellsGSM,cellsUMTS,cellsLTE);
             createBTSFile.insertDataToBtsFiles();
@@ -35,22 +34,6 @@ public class App
             e.printStackTrace();
             in.nextLine();
         }
-
-        //CellsGSM cellGSM=new CellsGSM("70006_ChD-Novopavlovka","a","a","a",
-        //        "a","a","a","a","a","a","5","6");
-        //System.out.println(cellGSM);
-        //cellsGSM=new ArrayList<>();
-        //cellsGSM.add(cellGSM);
-        //cellsGSM.add(cellGSM);
-        //cellsGSM.add(cellGSM);
-        //cellsGSM.add(cellGSM);
-        //try {
-        //    CreateBTSFile createBTSFile= new CreateBTSFile(cellsGSM);
-        //    createBTSFile.insertDataToBtsFiles();
-        //} catch (IOException e) {
-        //    e.printStackTrace();
-        //}
-
     }
 }
 

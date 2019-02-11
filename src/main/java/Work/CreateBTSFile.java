@@ -88,11 +88,6 @@ public class CreateBTSFile {
                         break;
 
                 }
-                //if(cellGSM.site.substring(5,10).equals("_ChD-")){
-                //    files.get(gsmName+chDName).write(cellGSM.toString());
-                //}else if(cellGSM.site.substring(5,10).equals("_Bsk-")){
-                //    files.get(gsmName+chDName).write(cellGSM.toString());
-                //}
 
             }
             System.out.println(cells.get(0).toString().substring(0,cells.get(0).toString().indexOf("\t"))+ " cells inserted!");

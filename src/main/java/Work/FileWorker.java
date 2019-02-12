@@ -22,7 +22,7 @@ public class FileWorker {
         this.technologies=technologies;
         this.regions=regions;
         files=new HashMap<>();
-        resultFolder="Results "+currentDate;
+        resultFolder="BTS files "+currentDate;
         File file = new File(resultFolder);
         file.mkdir();
         for(String technology:technologies){

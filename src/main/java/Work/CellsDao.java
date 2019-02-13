@@ -84,12 +84,12 @@ public class CellsDao {
         PreparedStatement statement= null;
         statement = this.con.prepareStatement(query);
         ResultSet rs=statement.executeQuery();
-        System.out.println("Executed selecting UMTS cells!");
+        System.out.println("Executed selecting LTE cells!");
         while (rs.next()){
 
             CellsLTE cellsLTE=new CellsLTE(rs.getString("name"),rs.getString("latitude"),
                     rs.getString("longitude"),getCellName(rs.getString("name"),rs.getString("tx_id")),
-                    rs.getString("channel"),rs.getString("cell_id").substring(5,7),rs.getString("azimuth"),
+                    rs.getString("channel"),getCellId(rs.getString("cell_id")),rs.getString("azimuth"),
                     rs.getString("beamwidth"),rs.getString("height"),rs.getString("tilt"),
                     rs.getString("phy_cell_id"),rs.getString("tac"));
             cellsLTEList.add(cellsLTE);
@@ -102,7 +102,19 @@ public class CellsDao {
     }
 
     private String getCellName(String site_name, String txId) {
+        if(txId.length()<7){
+            System.out.println("Wrong Length: "+ txId);
+            return site_name.substring(6);
+        }
         return site_name.substring(6)+"-"+txId.substring(5,7);
+    }
+
+    private String getCellId(String cellId){
+        if(cellId.length()<7){
+            System.out.println("Wrong Length: "+ cellId);
+            return cellId;
+        }
+        return cellId.substring(5,7);
     }
 
 }

@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class CellsDao {
 
-    private Connection con;
+    protected Connection con;
 
     public CellsDao(Connection con) {
         this.con = con;
@@ -101,15 +101,15 @@ public class CellsDao {
 
     }
 
-    private String getCellName(String site_name, String txId) {
+    protected String getCellName(String site_name, String txId) {
         if(txId.length()<7){
             System.out.println("Wrong Length: "+ txId);
-            return site_name.substring(6);
+            return txId;
         }
         return site_name.substring(6)+"-"+txId.substring(5,7);
     }
 
-    private String getCellId(String cellId){
+    protected String getCellId(String cellId){
         if(cellId.length()<7){
             System.out.println("Wrong Length: "+ cellId);
             return cellId;

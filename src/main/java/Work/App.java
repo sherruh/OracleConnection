@@ -13,17 +13,25 @@ public class App
         Scanner in=new Scanner(System.in);
         Connection con;
         CellsDao cellsDao;
+        CellsAtollDao cellsAtollDao;
         List<Cells> cellsGSM;
         List<Cells> cellsUMTS;
         List<Cells> cellsLTE;
+        List<Cells> cellsAtollGSM;
+        List<Cells> cellsAtollUMTS;
+        List<Cells> cellsAtollLTE;
 
         try {
 
             con=new MyOracleConnection().getCon();
             cellsDao=new CellsDao(con);
+            cellsAtollDao=new CellsAtollDao(con);
             cellsGSM=cellsDao.getCellsGSM();
             cellsUMTS=cellsDao.getCellsUMTS();
             cellsLTE=cellsDao.getCellsLTE();
+            cellsAtollGSM=cellsAtollDao.getCellsGSM();
+            cellsAtollUMTS=cellsAtollDao.getCellsUMTS();
+            cellsAtollLTE=cellsAtollDao.getCellsLTE();
             con.close();
             CreateBTSFile createBTSFile= new CreateBTSFile(cellsGSM,cellsUMTS,cellsLTE);
             createBTSFile.insertDataToBtsFiles();

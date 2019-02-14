@@ -26,13 +26,13 @@ public class CreateBTSFile {
     private Map<String, FileWriter> files;
     private FileWorker fileWorker;
 
-    public CreateBTSFile(List<Cells> cellsGSM,List<Cells> cellsUMTS,List<Cells> cellsLTE) throws IOException {
+    public CreateBTSFile(List<Cells> cellsGSM,List<Cells> cellsUMTS,List<Cells> cellsLTE,boolean atoll) throws IOException {
 
         this.cellsGSM = cellsGSM;
         this.cellsUMTS=cellsUMTS;
         this.cellsLTE=cellsLTE;
         currentDate= new SimpleDateFormat("ddMMyyyy").format(Calendar.getInstance().getTime());
-        fileWorker=new FileWorker(technologies,regions,currentDate);
+        fileWorker=new FileWorker(technologies,regions,currentDate,atoll);
         files=fileWorker.getFiles();
 
     }

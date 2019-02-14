@@ -33,7 +33,9 @@ public class App
             cellsAtollUMTS=cellsAtollDao.getCellsUMTS();
             cellsAtollLTE=cellsAtollDao.getCellsLTE();
             con.close();
-            CreateBTSFile createBTSFile= new CreateBTSFile(cellsGSM,cellsUMTS,cellsLTE);
+            CreateBTSFile createBTSFile= new CreateBTSFile(cellsGSM,cellsUMTS,cellsLTE,false);
+            createBTSFile.insertDataToBtsFiles();
+            createBTSFile= new CreateBTSFile(cellsAtollGSM,cellsAtollUMTS,cellsAtollLTE,true);
             createBTSFile.insertDataToBtsFiles();
             System.out.println("Ok!");
             in.nextLine();

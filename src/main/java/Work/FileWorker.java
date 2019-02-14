@@ -15,11 +15,16 @@ public class FileWorker {
     private HashMap<String,FileWriter> files;
     private String resultFolder;
 
-    public FileWorker(String[] technologies, String[] regions, String currentDate) throws IOException {
+    public FileWorker(String[] technologies, String[] regions, String currentDate,boolean atoll) throws IOException {
         this.technologies=technologies;
         this.regions=regions;
         files=new HashMap<>();
-        resultFolder="BTS files "+currentDate;
+        if(atoll){
+            resultFolder="BTS files "+currentDate+"\\For Atoll "+currentDate;
+            currentDate="Atoll_"+currentDate;
+        }else {
+            resultFolder="BTS files "+currentDate;
+        }
         File file = new File(resultFolder);
         file.mkdir();
         for(String technology:technologies){

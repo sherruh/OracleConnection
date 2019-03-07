@@ -30,7 +30,7 @@ public abstract class Cells {
     String roundValue(String value){
         String roundedValue;
         if(value!=null && value!=""){
-            roundedValue=String.valueOf((int)Math.round(Double.parseDouble(height)));
+            roundedValue=String.valueOf((int)Math.round(Double.parseDouble(value)));
         }else{
             return value;
         }

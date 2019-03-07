@@ -22,9 +22,19 @@ public abstract class Cells {
         this.channel = channel;
         this.cid = cid;
         this.direction = direction;
-        this.beam = beam;
-        this.height = height;
+        this.beam = roundValue(beam);
+        this.height = roundValue(height);
         this.tilt = tilt;
+    }
+
+    String roundValue(String value){
+        String roundedValue;
+        if(value!=null && value!=""){
+            roundedValue=String.valueOf((int)Math.round(Double.parseDouble(height)));
+        }else{
+            return value;
+        }
+        return roundedValue;
     }
 
     @Override
